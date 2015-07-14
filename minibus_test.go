@@ -1,4 +1,5 @@
 package minibus
+
 import (
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -9,17 +10,17 @@ func TestMiniBus(t *testing.T) {
 	bus := NewMiniBus()
 	assert.NotNil(t, bus)
 
-	bus.Sub("/topic", func(interface{}){})
+	bus.Sub("/topic", func(interface{}) {})
 	assert.Equal(t, 1, len(bus.GetSub("/topic")))
 
-	bus.Sub("/topic", func(interface{}){})
+	bus.Sub("/topic", func(interface{}) {})
 	assert.Equal(t, 2, len(bus.GetSub("/topic")))
 
-	bus.Sub("/topic/second", func(interface{}){})
+	bus.Sub("/topic/second", func(interface{}) {})
 	assert.Equal(t, 1, len(bus.GetSub("/topic/second")))
 
 	called := false
-	bus.Sub("/topic/called", func(msg interface{}){
+	bus.Sub("/topic/called", func(msg interface{}) {
 		called = true
 	})
 	bus.Pub("/topic/called", "")
